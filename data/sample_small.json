@@ -1,0 +1,91 @@
+{
+  "world": "Azeron",
+  "regions": [
+    {
+      "name": "Frostvale",
+      "dungeons": [
+        {
+          "name": "Grimhold",
+          "rooms": [
+            {
+              "name": "Antechamber",
+              "chests": [
+                {
+                  "name": "Iron Chest #1",
+                  "items": [
+                    {
+                      "sku": "7F-ICE-BOW",
+                      "name": "Ice Bow",
+                      "rarity": "epic",
+                      "qty": 1,
+                      "base_price": 420.0,
+                      "tags": [
+                        "bow",
+                        "ice",
+                        "ranged"
+                      ]
+                    },
+                    {
+                      "sku": "HP-POT-SM",
+                      "name": "Small Health Potion",
+                      "rarity": "common",
+                      "qty": 5,
+                      "base_price": 5.0,
+                      "tags": [
+                        "potion",
+                        "health"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sunreach",
+      "dungeons": [
+        {
+          "name": "Amber Vault",
+          "rooms": [
+            {
+              "name": "Treasure Hall",
+              "chests": [
+                {
+                  "name": "Golden Chest",
+                  "items": [
+                    {
+                      "sku": "SR-SWD-LG",
+                      "name": "Sunreach Greatsword",
+                      "rarity": "rare",
+                      "qty": 1,
+                      "base_price": 250.0,
+                      "tags": [
+                        "sword",
+                        "two-handed"
+                      ]
+                    },
+                    {
+                      "sku": "MP-POT-MD",
+                      "name": "Medium Mana Potion",
+                      "rarity": "uncommon",
+                      "qty": 3,
+                      "base_price": 12.0,
+                      "tags": [
+                        "potion",
+                        "mana"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 1
+}
