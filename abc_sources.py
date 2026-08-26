@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -26,13 +27,13 @@ class JSONInventorySource(InventorySource):
     """
 
     def __init__(self, path: str):
-        # TODO: Load the JSON object and cache its version (default 1).
-        raise NotImplementedError
+        self.path = path
+        with open(self.path, "r", encoding="utf-8") as f:
+            self._root = json.load(f)
+        self._version = self._root.get("version", 1)
 
     def root(self) -> Any:
-        # TODO: Return the loaded root object.
-        raise NotImplementedError
+        return self._root
 
     def version(self) -> int | str:
-        # TODO: Return the cached version.
-        raise NotImplementedError
+        return self._version
