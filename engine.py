@@ -23,10 +23,19 @@ class QueryEngine:
         You may implement this traversal recursively or with an explicit stack.
         Do not first build a complete list of Item objects.
         """
-        # TODO: Implement the traversal. This unreachable yield keeps the stub a
-        # generator without doing the students' work for them.
-        if False:
-            yield Item()  # type: ignore[call-arg]
+        for region in node.get("regions", []):
+            for dungeon in region.get("dungeons", []):
+                for room in dungeon.get("rooms", []):
+                    for chest in room.get("chests", []):
+                        for item in chest.get("items", []):
+                            yield Item(
+                                sku=item["sku"],
+                                name=item["name"],
+                                rarity=item["rarity"],
+                                qty=item["qty"],
+                                base_price=item["base_price"],
+                                tags=list(item.get("tags", [])),
+                            )
 
     @logged_query
     def walk_items(self) -> Iterator[Item]:
