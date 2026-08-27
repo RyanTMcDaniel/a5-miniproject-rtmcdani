@@ -39,24 +39,20 @@ class QueryEngine:
 
     @logged_query
     def walk_items(self) -> Iterator[Item]:
-        # TODO: Delegate lazily to _walk_node(self.source.root()).
-        raise NotImplementedError
-        yield  # pragma: no cover
+        yield from self._walk_node(self.source.root())
 
     @validate_predicate
     def filter_items(self, pred: Callable[[Item], bool]) -> Iterator[Item]:
-        # TODO: Yield matching items lazily.
-        raise NotImplementedError
-        yield  # pragma: no cover
+        yield from filter(pred, self._walk_node(self.source.root()))
 
     def map_items(self, fn: Callable[[Item], T]) -> Iterator[T]:
-        # TODO: Yield mapped values lazily.
-        raise NotImplementedError
-        yield  # pragma: no cover
+        yield from map(fn, self._walk_node(self.source.root()))
 
     def reduce_items(self, reducer: Callable[[U, Item], U], initial: U) -> U:
-        # TODO: Fold all items from the traversal into an accumulator.
-        raise NotImplementedError
+        acc = initial
+        for item in self._walk_node(self.source.root()):
+            acc = reducer(acc, item)
+        return acc
 
     def find_item_by_sku(self, sku: str) -> Item | None:
         """Sort by SKU and use a student-written binary-search loop.
@@ -64,5 +60,15 @@ class QueryEngine:
         Linear search, dictionary lookup, and the bisect module do not satisfy
         the assignment requirement.
         """
-        # TODO: Materialize, sort, and implement lo/hi/mid binary search.
-        raise NotImplementedError
+        items = sorted(self._walk_node(self.source.root()), key=lambda item: item.sku)
+        lo, hi = 0, len(items) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if items[mid].sku == sku:
+                return items[mid]
+            elif items[mid].sku < sku:
+                lo = mid + 1
+            else:
+                hi = mid - 1
+
+        return None
